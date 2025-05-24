@@ -3,10 +3,10 @@ from sklearn.linear_model import ElasticNet
 from sklearn.neighbors import KNeighborsRegressor
 
 
-def select_model(model_name, **kwargs):
-    if model_name == "knn":
-        return KNeighborsRegressor(**kwargs)
-    elif model_name == "elasticnet":
-        return ElasticNet(**kwargs)
+def select_model(args):
+    if args.model == "elasticnet":
+        return ElasticNet(alpha=args.alpha, l1_ratio=args.l1_ratio)
+    elif args.model == "knn":
+        return KNeighborsRegressor(n_neighbors=args.n_neighbors)
     else:
-        raise ValueError("Modelo no soportado. Use 'knn' o 'elasticnet'.")
+        raise ValueError("Invalid model type. Choose 'elasticnet' or 'knn'.")
